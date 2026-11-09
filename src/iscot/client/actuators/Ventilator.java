@@ -3,10 +3,9 @@ package iscot.client.actuators;
 import java.awt.BorderLayout;
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import javax.swing.*;
 
+import iscot.client.gui.HistoryPanel;
 import iscot.client.gui.VentilatorIcon;
 import iscot.enums.Areas;
 
@@ -47,12 +46,8 @@ public class Ventilator {
 			VentilatorIcon ventilator = new VentilatorIcon();
 			painel.add(ventilator,BorderLayout.CENTER);
 
-			JTextArea textArea = new JTextArea(6, 25);
-			textArea.setEditable(false);
-
-			JScrollPane scroll = new JScrollPane(textArea);
-			scroll.setBorder(BorderFactory.createTitledBorder("Histórico de ações"));
-			painel.add(scroll,BorderLayout.SOUTH);
+			HistoryPanel historico = new HistoryPanel();
+			painel.add(historico,BorderLayout.SOUTH);
 
 			janela.setContentPane(painel);
 			janela.setLocation(600, 400);
@@ -61,7 +56,8 @@ public class Ventilator {
 			janela.setVisible(true);
 
 			Thread.sleep(5000);
-			ventilator.setAtivo(true);
+			ventilator.setLigado(true);
+			historico.registar("Ventilador ligado");
 
 			// TODO: receive and handle messages from server
 
@@ -69,9 +65,4 @@ public class Ventilator {
 		}
 	}
 
-	private static void addActionToHistory(JTextArea textArea, String acction) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-		LocalTime date = LocalTime.parse(LocalTime.now().format(formatter));
-		textArea.append(acction + " " + date);
-	}
 }

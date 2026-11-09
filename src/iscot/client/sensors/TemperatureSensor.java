@@ -36,7 +36,7 @@ public class TemperatureSensor {
             // Criar os componentes gráficos
             JPanel painel=new JPanel();
             painel.setLayout(new BorderLayout());
-            SensorControl sensorControl= new SensorControl( "ºC", "Temperatura - "+area, "ºC",
+            SensorControl sensorControl= new SensorControl( "🌡", "Temperatura - "+area, "°C",
                     0, 40, 1, 20,
                     valor -> {
                         // TODO handle change in sensor

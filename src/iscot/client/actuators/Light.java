@@ -3,13 +3,10 @@ package iscot.client.actuators;
 import java.awt.BorderLayout;
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import javax.swing.*;
 
-import iscot.client.gui.ACIcon;
+import iscot.client.gui.HistoryPanel;
 import iscot.client.gui.LightIcon;
-import iscot.client.gui.VentilatorIcon;
 import iscot.enums.Areas;
 
 public class Light {
@@ -40,7 +37,7 @@ public class Light {
                 return;
             }
 
-            JFrame janela = new JFrame("AC em "+area);
+            JFrame janela = new JFrame("Luz em "+area);
             janela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
             // Criar os componentes gráficos
@@ -49,12 +46,8 @@ public class Light {
             LightIcon light = new LightIcon();
             painel.add(light,BorderLayout.CENTER);
 
-            JTextArea textArea = new JTextArea(6, 25);
-            textArea.setEditable(false);
-
-            JScrollPane scroll = new JScrollPane(textArea);
-            scroll.setBorder(BorderFactory.createTitledBorder("Histórico de ações"));
-            painel.add(scroll,BorderLayout.SOUTH);
+            HistoryPanel historico = new HistoryPanel();
+            painel.add(historico,BorderLayout.SOUTH);
 
             janela.setContentPane(painel);
             janela.setLocation(600, 400);
@@ -63,7 +56,8 @@ public class Light {
             janela.setVisible(true);
 
             Thread.sleep(5000);
-            light.setAtivo(true);
+            light.setLigada(true);
+            historico.registar("Lâmpada ligada");
 
             // TODO: receive and handle messages from server
 
@@ -71,9 +65,4 @@ public class Light {
         }
     }
 
-    private static void addActionToHistory(JTextArea textArea, String acction) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-        LocalTime date = LocalTime.parse(LocalTime.now().format(formatter));
-        textArea.append(acction + " " + date);
-    }
 }

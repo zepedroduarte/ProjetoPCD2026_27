@@ -36,7 +36,7 @@ public class HumiditySensor {
 			// Criar os componentes gráficos
 			JPanel painel=new JPanel();
 			painel.setLayout(new BorderLayout());
-			SensorControl sensorControl= new SensorControl( "☀", "Humidade - "+area, "%",
+			SensorControl sensorControl= new SensorControl( "💧", "Humidade - "+area, "%",
 				    0, 100, 1, 50,
 				    valor -> {
 				    	// TODO handle change in sensor
