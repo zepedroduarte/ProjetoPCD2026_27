@@ -1,12 +1,11 @@
-package iscot.client;
+package iscot.client.sensors;
 
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import iscot.client.gui.LightIcon;
+
 import iscot.client.gui.SensorControl;
 import iscot.enums.Areas;
-import iscot.enums.Type;
 
 public class HumiditySensor {
 
