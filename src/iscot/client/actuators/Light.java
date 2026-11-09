@@ -32,7 +32,13 @@ public class Light {
             // TODO connect to server
 
             // TODO register with the server
-            Areas area=Areas.valueOf(args[2]);
+            Areas area;
+
+            try {
+                area = Areas.valueOf(args[2]);
+            } catch (IllegalArgumentException e) {
+                return;
+            }
 
             JFrame janela = new JFrame("AC em "+area);
             janela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
