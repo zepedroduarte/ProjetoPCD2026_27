@@ -5,24 +5,21 @@ import iscot.enums.Areas;
 
 public class AreaTemperatureOrderEvent extends HighLevelOrderEvent {
     private final AirConditioningMode mode;
-    private final boolean state;
+    private final double temperature;
 
-    protected AreaTemperatureOrderEvent(Areas area, AirConditioningMode mode, boolean state) {
+    public AreaTemperatureOrderEvent(Areas area, AirConditioningMode mode, double temperature) {
         super(area);
         this.mode = mode;
-        this.state = state;
+        this.temperature = temperature;
     }
 
     public AirConditioningMode getMode(){
         return this.mode;
     }
 
-    public boolean getState(){
-        return this.state;
-    }
 
     @Override
     public String toString(){
-        return "AreaTemperatureOrderEvent [state=" + state + ", area=" + getArea() + ", getType()=" + getType() + "]";
+        return "AreaTemperatureOrderEvent [mode=" + mode + ", temperature=" + temperature + ", area=" + getArea() + ", getType()=" + getType() + "]";
     }
 }

@@ -6,7 +6,7 @@ public class AreaIrrigationOrderEvent extends HighLevelOrderEvent {
 
     private final boolean state;
 
-    protected AreaIrrigationOrderEvent(Areas area, boolean state) {
+    public AreaIrrigationOrderEvent(Areas area, boolean state) {
         super(area);
         this.state = state;
     }

@@ -6,7 +6,7 @@ public class AreaLightingOrderEvent extends HighLevelOrderEvent {
 
     private final boolean state;
 
-    protected AreaLightingOrderEvent(Areas area, boolean state) {
+    public AreaLightingOrderEvent(Areas area, boolean state) {
         super(area);
         this.state = state;
     }

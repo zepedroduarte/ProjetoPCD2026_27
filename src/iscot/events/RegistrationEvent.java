@@ -5,7 +5,7 @@ import iscot.enums.Type;
 
 public class RegistrationEvent extends Event{
 
-    protected RegistrationEvent(Areas area, Type type) {
+    public RegistrationEvent(Areas area, Type type) {
         super(area, type);
     }
 

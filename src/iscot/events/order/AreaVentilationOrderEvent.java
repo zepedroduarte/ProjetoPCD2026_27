@@ -6,8 +6,7 @@ public class AreaVentilationOrderEvent extends HighLevelOrderEvent{
 
     private final boolean state;
 
-
-    protected AreaVentilationOrderEvent(Areas area, boolean state) {
+    public AreaVentilationOrderEvent(Areas area, boolean state) {
         super(area);
         this.state = state;
     }

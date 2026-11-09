@@ -8,7 +8,7 @@ public abstract class Event{
     private final Areas area;
     private final Type type;
 
-    protected Event(Areas area, Type type) {
+    public Event(Areas area, Type type) {
         this.area = area;
         this.type = type;
     }
