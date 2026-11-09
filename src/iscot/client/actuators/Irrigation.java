@@ -8,6 +8,7 @@ import javax.swing.*;
 import iscot.client.gui.HistoryPanel;
 import iscot.client.gui.IrrigationIcon;
 import iscot.enums.Areas;
+import iscot.events.order.AreaIrrigationOrderEvent;
 
 public class Irrigation {
 
@@ -55,9 +56,17 @@ public class Irrigation {
             janela.pack();
             janela.setVisible(true);
 
-            Thread.sleep(5000);
-            irrigation.setAtiva(true);
-            historico.registar("Rega ligada");
+            AreaIrrigationOrderEvent[] ordens = {
+                    new AreaIrrigationOrderEvent(area, true),
+                    new AreaIrrigationOrderEvent(area, false),
+                    new AreaIrrigationOrderEvent(area, true)
+            };
+            for (AreaIrrigationOrderEvent ordem : ordens) {
+                Thread.sleep(3000);
+                System.out.println(ordem);
+                irrigation.setAtiva(ordem.getState());
+                historico.registar(ordem.getState() ? "Rega ligada" : "Rega desligada");
+            }
 
             // TODO: receive and handle messages from server
 

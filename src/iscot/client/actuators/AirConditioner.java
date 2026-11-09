@@ -9,6 +9,9 @@ import iscot.client.gui.HistoryPanel;
 import iscot.client.gui.ACIcon;
 import iscot.enums.AirConditioningMode;
 import iscot.enums.Areas;
+import iscot.events.order.AreaTemperatureOrderEvent;
+import iscot.events.order.AreaVentilationOrderEvent;
+import iscot.events.order.HighLevelOrderEvent;
 
 public class AirConditioner {
 
@@ -56,9 +59,25 @@ public class AirConditioner {
             janela.pack();
             janela.setVisible(true);
 
-            Thread.sleep(5000);
-            ac.setModo(AirConditioningMode.Aquecimento);
-            historico.registar("AC ligado em modo Aquecimento");
+            HighLevelOrderEvent[] ordens = {
+                    new AreaTemperatureOrderEvent(area, AirConditioningMode.Aquecimento, 24),
+                    new AreaTemperatureOrderEvent(area, AirConditioningMode.Desligado, 24),
+            };
+
+            for (HighLevelOrderEvent ordem : ordens) {
+                Thread.sleep(3000);
+                System.out.println(ordem);
+
+                if (ordem instanceof AreaTemperatureOrderEvent t) {
+                    ac.setModo(t.getMode());
+                    if (t.getMode() == AirConditioningMode.Desligado) {
+                        historico.registar("AC desligado");
+                    } else {
+                        ac.setTemperatura(t.getTemperature());
+                        historico.registar("AC em modo " + t.getMode() + " a " + t.getTemperature() + " °C");
+                    }
+                }
+            }
 
 
             // TODO: receive and handle messages from server

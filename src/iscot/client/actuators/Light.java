@@ -8,6 +8,7 @@ import javax.swing.*;
 import iscot.client.gui.HistoryPanel;
 import iscot.client.gui.LightIcon;
 import iscot.enums.Areas;
+import iscot.events.order.AreaLightingOrderEvent;
 
 public class Light {
 
@@ -55,9 +56,17 @@ public class Light {
             janela.pack();
             janela.setVisible(true);
 
-            Thread.sleep(5000);
-            light.setLigada(true);
-            historico.registar("Lâmpada ligada");
+            AreaLightingOrderEvent[] ordens = {
+                    new AreaLightingOrderEvent(area, true),
+                    new AreaLightingOrderEvent(area, false),
+                    new AreaLightingOrderEvent(area, true)
+            };
+            for (AreaLightingOrderEvent ordem : ordens) {
+                Thread.sleep(3000);
+                System.out.println(ordem);
+                light.setLigada(ordem.getState());
+                historico.registar(ordem.getState() ? "Lâmpada ligada" : "Lâmpada desligada");
+            }
 
             // TODO: receive and handle messages from server
 

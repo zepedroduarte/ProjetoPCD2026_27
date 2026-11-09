@@ -8,6 +8,7 @@ import javax.swing.*;
 import iscot.client.gui.HistoryPanel;
 import iscot.client.gui.VentilatorIcon;
 import iscot.enums.Areas;
+import iscot.events.order.AreaVentilationOrderEvent;
 
 public class Ventilator {
 
@@ -55,9 +56,17 @@ public class Ventilator {
 			janela.pack();
 			janela.setVisible(true);
 
-			Thread.sleep(5000);
-			ventilator.setLigado(true);
-			historico.registar("Ventilador ligado");
+			AreaVentilationOrderEvent[] ordens = {
+					new AreaVentilationOrderEvent(area, true),
+					new AreaVentilationOrderEvent(area, false),
+					new AreaVentilationOrderEvent(area, true)
+			};
+			for (AreaVentilationOrderEvent ordem : ordens) {
+				Thread.sleep(3000);
+				System.out.println("Recebido: " + ordem);
+				ventilator.setLigado(ordem.getState());
+				historico.registar(ordem.getState() ? "Ventilador ligado" : "Ventilador desligado");
+			}
 
 			// TODO: receive and handle messages from server
 

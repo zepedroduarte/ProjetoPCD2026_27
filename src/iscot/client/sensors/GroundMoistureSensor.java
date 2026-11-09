@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 
 import iscot.client.gui.SensorControl;
 import iscot.enums.Areas;
+import iscot.events.sensor.GroundMoistureSensorEvent;
 
 public class GroundMoistureSensor {
 
@@ -40,7 +41,7 @@ public class GroundMoistureSensor {
                     0, 100, 1, 50,
                     valor -> {
                         // TODO handle change in sensor
-                        System.out.println("Mudou para:"+valor);
+                        System.out.println(new GroundMoistureSensorEvent(area, valor));
                     });
             painel.add(sensorControl,BorderLayout.CENTER);
             janela.setContentPane(painel);

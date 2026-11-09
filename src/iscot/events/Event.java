@@ -1,9 +1,11 @@
 package iscot.events;
 
+import java.io.Serializable;
+
 import iscot.enums.Areas;
 import iscot.enums.Type;
 
-public abstract class Event{
+public abstract class Event {
 
     private final Areas area;
     private final Type type;
